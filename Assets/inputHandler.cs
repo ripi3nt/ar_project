@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 
-//nov comment
+
 public class InputHandler : MonoBehaviour
 {
     public Button resetButton;
