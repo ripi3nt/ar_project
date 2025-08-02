@@ -16,7 +16,8 @@ public class InputHandler : MonoBehaviour
     private TextToSpeech tts;
     public TextMeshProUGUI text;
 
-    public GameObject dogObject;
+    private GameObject dogObject;
+    public PetData petData;
     public Animator dogAnimator;
 
     void Start()
@@ -24,6 +25,8 @@ public class InputHandler : MonoBehaviour
         tts = new TextToSpeech(this);
         resetButton.onClick.AddListener(handleReset);
         micButton.onClick.AddListener(handleMicrophone);
+        EntityManager.Instance.SpawnPet();
+        dogObject = EntityManager.Instance.PetInstance;
 
         if (dogObject != null)
         {

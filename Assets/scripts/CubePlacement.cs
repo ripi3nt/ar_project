@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
@@ -6,10 +7,16 @@ using UnityEngine.XR.ARSubsystems;
 public class CubePlacement : MonoBehaviour
 {
     public ARPlaneManager planeManager;
-    public GameObject entity;
+    private GameObject entity;
     public ARRaycastManager raycastManager;
 
     public static bool placed = false;
+
+    void Start()
+    {
+        EntityManager.Instance.SpawnPet();
+        entity = EntityManager.Instance.PetInstance;
+    }
 
     void OnEnable()
     {
