@@ -8,4 +8,5 @@ public class PetData : ScriptableObject
     public GameObject petPrefab;
     public int health;
     public int attackPower;
+    public RuntimeAnimatorController animator;
 }
