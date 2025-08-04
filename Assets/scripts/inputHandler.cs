@@ -2,6 +2,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 
@@ -10,6 +11,7 @@ public class InputHandler : MonoBehaviour
 {
     public Button resetButton;
     public Button micButton;
+    public Button attackButton;
     public Button busyMicButton;
     public ARSession aRSession;
     public MicrophoneRecorder microphone;
@@ -25,6 +27,7 @@ public class InputHandler : MonoBehaviour
         tts = new TextToSpeech(this);
         resetButton.onClick.AddListener(handleReset);
         micButton.onClick.AddListener(handleMicrophone);
+        attackButton.onClick.AddListener(() => SceneManager.LoadScene("BattleScene", LoadSceneMode.Single));
         EntityManager.Instance.SpawnPet();
         dogObject = EntityManager.Instance.PetInstance;
 

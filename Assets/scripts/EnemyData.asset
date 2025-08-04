@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc829cc0223bd6a449de3d35f6a1874c, type: 3}
-  m_Name: Model
+  m_Script: {fileID: 11500000, guid: e8a0395d8d9084742ad8ba6737e395a0, type: 3}
+  m_Name: EnemyData
   m_EditorClassIdentifier: 
-  petName: pet
+  enemyName: rem
   icon: {fileID: 0}
-  petPrefab: {fileID: 919132149155446097, guid: 9f22bfacf553882428f5636bc9a467af,
+  enemyPrefab: {fileID: 919132149155446097, guid: c87efcd07f8d89949a9336645e245f81,
     type: 3}
-  health: 100
+  health: 0
   attackPower: 0
-  animator: {fileID: 9100000, guid: 9f62cb52e9279a847adbadbad4cf7750, type: 2}
+  animator: {fileID: 0}
