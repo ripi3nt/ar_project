@@ -420,7 +420,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedPet: {fileID: 11400000, guid: a1fcd77f418d39240aefe650d5dafae8, type: 2}
-  selectedEnemy: {fileID: 0}
+  selectedEnemy: {fileID: 11400000, guid: c42c9877a46cf594eb12e421d33da841, type: 2}
   petHealth: 0
   enemyHealth: 0
 --- !u!1 &410087039
