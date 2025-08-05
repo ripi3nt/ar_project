@@ -52,7 +52,8 @@ public class BattleSystem : MonoBehaviour
 
         if (playerMove == Move.None)
         {
-            playerScore -= 1;
+            playerMove = (Move)Random.Range(0, 2);
+            yield return new WaitForSeconds(5f);
         }
 
         enemyMove = (Move)Random.Range(0, 3);
@@ -66,10 +67,11 @@ public class BattleSystem : MonoBehaviour
             yield break;
         }
         turnTime -= 0.5f;
+        yield return new WaitForSeconds(2f);
         StartCoroutine(StartTurn());
     }
 
-    IEnumerator ResolveRound()
+    void ResolveRound()
     {
         string outcome = "";
 
@@ -95,7 +97,6 @@ public class BattleSystem : MonoBehaviour
         scoreLabel.text = playerScore + " : " + enemyScore;
         outcomeLabel.text = outcome;
         outcomeLabel.gameObject.SetActive(true);
-        yield return new WaitForSeconds(2f);
         outcomeLabel.gameObject.SetActive(false);
     }
 

@@ -423,6 +423,52 @@ MonoBehaviour:
   selectedEnemy: {fileID: 11400000, guid: c42c9877a46cf594eb12e421d33da841, type: 2}
   petHealth: 0
   enemyHealth: 0
+--- !u!1 &395805776
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 395805778}
+  - component: {fileID: 395805777}
+  m_Layer: 0
+  m_Name: EntityManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &395805777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 395805776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e71ce3871cce9e646a1f5dcd44b2ba5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  petData: {fileID: 11400000, guid: a1fcd77f418d39240aefe650d5dafae8, type: 2}
+  PetInstance: {fileID: 0}
+--- !u!4 &395805778
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 395805776}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 521.85187, y: 0, z: -932.625}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1006,7 +1052,6 @@ GameObject:
   - component: {fileID: 1174078437}
   - component: {fileID: 1174078440}
   - component: {fileID: 1174078441}
-  - component: {fileID: 1174078442}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1121,20 +1166,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   planeManager: {fileID: 2512387470422636670}
   raycastManager: {fileID: 2512387470422636671}
---- !u!114 &1174078442
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1174078436}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e71ce3871cce9e646a1f5dcd44b2ba5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  petData: {fileID: 11400000, guid: a1fcd77f418d39240aefe650d5dafae8, type: 2}
-  PetInstance: {fileID: 0}
 --- !u!1 &1229165839
 GameObject:
   m_ObjectHideFlags: 0
@@ -1521,6 +1552,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2080510126}
+  - component: {fileID: 2080510127}
   m_Layer: 0
   m_Name: EnemySystem
   m_TagString: Untagged
@@ -1543,6 +1575,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2080510127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2080510125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c567f7aa18b68c4ab10784fc25fc6e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animalPrefab: {fileID: 919132149155446097, guid: 61a020cefddbb2f45968ff34bd328cbc,
+    type: 3}
+  maxAnimals: 5
+  spawnRadius: 10
+  minDistanceToPlayer: 5
 --- !u!20 &2512387468973847745
 Camera:
   m_ObjectHideFlags: 0
@@ -2058,3 +2107,4 @@ SceneRoots:
   - {fileID: 1136036924}
   - {fileID: 2080510126}
   - {fileID: 360931891}
+  - {fileID: 395805778}
