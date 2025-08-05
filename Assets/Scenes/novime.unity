@@ -119,6 +119,53 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &42419290
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 42419292}
+  - component: {fileID: 42419291}
+  m_Layer: 0
+  m_Name: PetManger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &42419291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 42419290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e71ce3871cce9e646a1f5dcd44b2ba5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  petData: {fileID: 11400000, guid: a1fcd77f418d39240aefe650d5dafae8, type: 2}
+  PetInstance: {fileID: 919132149155446097, guid: 9f22bfacf553882428f5636bc9a467af,
+    type: 3}
+--- !u!4 &42419292
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 42419290}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.75801, y: 0, z: -3.69888}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &270801558
 GameObject:
   m_ObjectHideFlags: 0
@@ -918,7 +965,7 @@ MonoBehaviour:
   aRSession: {fileID: 1167446572}
   microphone: {fileID: 2512387468973847777}
   text: {fileID: 1722698801}
-  dogObject: {fileID: 1096534510433106328}
+  petData: {fileID: 0}
   dogAnimator: {fileID: 1096534510433106329}
 --- !u!114 &1174078441
 MonoBehaviour:
@@ -933,7 +980,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   planeManager: {fileID: 2512387470422636670}
-  entity: {fileID: 1096534510433106328}
   raycastManager: {fileID: 2512387470422636671}
 --- !u!1 &1450056897
 GameObject:
@@ -1055,6 +1101,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1450056897}
   m_CullTransparentMesh: 1
+--- !u!1 &1512247398
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1512247399}
+  m_Layer: 0
+  m_Name: AnimalSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1512247399
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1512247398}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.75801, y: 0, z: -3.69888}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1590640676
 GameObject:
   m_ObjectHideFlags: 0
@@ -7790,3 +7867,5 @@ SceneRoots:
   - {fileID: 1246942020616379105}
   - {fileID: 3354010696192425102}
   - {fileID: 323270709010899746}
+  - {fileID: 1512247399}
+  - {fileID: 42419292}
