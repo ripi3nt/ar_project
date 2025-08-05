@@ -20,19 +20,35 @@ public class EntityManager : MonoBehaviour {
 
     public void SpawnPet()
     {
-        if (PetInstance != null) return;
+        if (PetInstance != null)
+        {
+            //Debug.Log("Pet already spawned.");
+            return;
+        }
 
         if (petData == null || petData.petPrefab == null)
         {
-            Debug.LogError("PetData is missing!");
+            Debug.LogError("PetData or petPrefab is missing!");
             return;
         }
 
         PetInstance = Instantiate(petData.petPrefab);
-        PetInstance.SetActive(false); // Will be positioned by CubePlacement
+        Debug.Log("Pet has been instantiated: " + PetInstance.name);
+
+        PetInstance.SetActive(false); // Will be activated later by CubePlacement
+
         Animator animator = PetInstance.GetComponent<Animator>();
-        animator.runtimeAnimatorController = petData.animator;
+        if (animator == null)
+        {
+            //Debug.LogWarning("Animator not found on pet prefab.");
+        }
+        else
+        {
+            animator.runtimeAnimatorController = petData.animator;
+            Debug.Log("Animator assigned.");
+        }
     }
+
 
     public void ReplacePet(PetData newData)
     {
