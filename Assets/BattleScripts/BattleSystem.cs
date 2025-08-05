@@ -43,11 +43,11 @@ public class BattleSystem : MonoBehaviour
         playerMove = Move.None;
         float timer = turnTime;
 
-        if (turnTime > 0 && playerMove == Move.None)
+        while (turnTime > 0 && playerMove == Move.None)
         {
             timerLabel.text = "Time: " + timer;
-            yield return null;
             timer -= Time.deltaTime;
+            yield return null;
         }
 
         if (playerMove == Move.None)
