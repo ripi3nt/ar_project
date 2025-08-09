@@ -9,4 +9,6 @@ public class PetData : ScriptableObject
     public int health;
     public int attackPower;
     public RuntimeAnimatorController animator;
+    public Vector3 savedPosition;
+    public Quaternion savedRotation;
 }
