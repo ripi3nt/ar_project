@@ -18,4 +18,6 @@ MonoBehaviour:
     type: 3}
   health: 0
   attackPower: 0
-  animator: {fileID: 0}
+  animator: {fileID: 9100000, guid: ac4dc75a4347d4a4bbed33adf7c2f6d3, type: 2}
+  savedPosition: {x: 0, y: 0, z: 0}
+  savedRotation: {x: 0, y: 0, z: 0, w: 0}

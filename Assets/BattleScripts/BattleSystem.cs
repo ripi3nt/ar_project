@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class BattleSystem : MonoBehaviour
 {
-    public BattleSystem Instance;
+    public static BattleSystem Instance { get; private set; }
     public Button rock, paper, scissors;
     public TextMeshProUGUI timerLabel;
     public TextMeshProUGUI outcomeLabel;
@@ -14,16 +14,22 @@ public class BattleSystem : MonoBehaviour
 
     private PetData petData;
     private EnemyData enemyData;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
 
-    private enum Move {Rock, Paper, Scissors, None}
+    private enum Move { Rock, Paper, Scissors, None }
     private Move playerMove = Move.None;
     private Move enemyMove = Move.None;
     private int playerScore = 0;
     private int enemyScore = 0;
     private float turnTime = 5f;
+    public bool start = false;
     void Start()
     {
+        StartCoroutine(WaitForStart());
+    }
+
+    IEnumerator WaitForStart()
+    {
+        yield return new WaitUntil(() => start);
         petData = BattleManager.Instance.selectedPet;
         enemyData = BattleManager.Instance.selectedEnemy;
 
@@ -31,21 +37,30 @@ public class BattleSystem : MonoBehaviour
         paper.onClick.AddListener(() => PlayerSelectMove(Move.Paper));
         scissors.onClick.AddListener(() => PlayerSelectMove(Move.Scissors));
 
-        StartCoroutine(StartTurn());
+        StartCoroutine(StartTurn(1));
+
     }
 
-    void PlayerSelectMove(Move move) {
+    void PlayerSelectMove(Move move)
+    {
         playerMove = move;
     }
 
-    IEnumerator StartTurn()
+    IEnumerator StartTurn(int turn)
     {
         playerMove = Move.None;
         float timer = turnTime;
 
-        while (turnTime > 0 && playerMove == Move.None)
+        if (turn == 1)
         {
-            timerLabel.text = "Time: " + timer;
+        yield return StartCoroutine(ShowInfo("Game starting in 3", 1));
+        yield return StartCoroutine(ShowInfo("Game starting in 2", 1));
+        yield return StartCoroutine(ShowInfo("Game starting in 1", 1));
+        }
+
+        while (timer > 0f && playerMove == Move.None)
+        {
+            timerLabel.text = "Time: " + timer.ToString("F2");
             timer -= Time.deltaTime;
             yield return null;
         }
@@ -53,25 +68,27 @@ public class BattleSystem : MonoBehaviour
         if (playerMove == Move.None)
         {
             playerMove = (Move)Random.Range(0, 2);
-            yield return new WaitForSeconds(5f);
+            yield return StartCoroutine(ShowInfo("You didn't make a move this round!", 3f));
         }
 
         enemyMove = (Move)Random.Range(0, 3);
-        ResolveRound();
+        yield return StartCoroutine(ResolveRound());
         if (playerScore == 5)
         {
+            yield return StartCoroutine(ShowInfo("You win", 3));
             yield break;
         }
         else if (enemyScore == 5)
         {
+            yield return StartCoroutine(ShowInfo("You lose", 3));
             yield break;
         }
         turnTime -= 0.5f;
         yield return new WaitForSeconds(2f);
-        StartCoroutine(StartTurn());
+        StartCoroutine(StartTurn(++turn));
     }
 
-    void ResolveRound()
+    IEnumerator ResolveRound()
     {
         string outcome = "";
 
@@ -95,9 +112,7 @@ public class BattleSystem : MonoBehaviour
         }
 
         scoreLabel.text = playerScore + " : " + enemyScore;
-        outcomeLabel.text = outcome;
-        outcomeLabel.gameObject.SetActive(true);
-        outcomeLabel.gameObject.SetActive(false);
+        yield return StartCoroutine(ShowInfo(outcome , 2));
     }
 
     void Awake()
@@ -108,6 +123,14 @@ public class BattleSystem : MonoBehaviour
             return;
         }
         Instance = this;
+    }
+
+    IEnumerator ShowInfo(string info, float delay)
+    {
+        outcomeLabel.text = info;
+        outcomeLabel.gameObject.SetActive(true);
+        yield return new WaitForSeconds(delay);
+        outcomeLabel.gameObject.SetActive(false);
     }
 
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
@@ -7,20 +8,13 @@ using UnityEngine.XR.ARSubsystems;
 public class CubePlacement : MonoBehaviour
 {
     public ARPlaneManager planeManager;
-    private GameObject entity;
+    public static GameObject entity;
     public ARRaycastManager raycastManager;
-
     public static bool placed = false;
-
-    void Start()
-    {
-        EntityManager.Instance.SpawnPet();
-        entity = EntityManager.Instance.PetInstance;
-    }
 
     void OnEnable()
     {
-        planeManager.planesChanged += handleDetectedPlanes;    
+        planeManager.planesChanged += handleDetectedPlanes;
     }
 
     void handleDetectedPlanes(ARPlanesChangedEventArgs args)
@@ -28,6 +22,7 @@ public class CubePlacement : MonoBehaviour
         Debug.Log("Looking for planes...");
 
         if (placed) return;
+        if (entity == null ) return;
 
         Vector3 screenCenter = new Vector3(Screen.width / 2f, Screen.height / 2f);
         List<ARRaycastHit> hits = new List<ARRaycastHit>();
@@ -37,7 +32,7 @@ public class CubePlacement : MonoBehaviour
             Pose hitPose = hits[0].pose;
 
             //Debug.Log("Plane hit! Placing pet at: " + hitPose.position);
-
+    
             entity.transform.position = hitPose.position;
             Vector3 direction = Camera.main.transform.position - hitPose.position;
             direction.y = 0;

@@ -15,6 +15,7 @@ public class EntityManager : MonoBehaviour {
         }
 
         Instance = this;
+        SpawnPet();
         DontDestroyOnLoad(gameObject); // Optional: persist across scenes
     }
 
@@ -35,7 +36,9 @@ public class EntityManager : MonoBehaviour {
         PetInstance = Instantiate(petData.petPrefab);
         Debug.Log("Pet has been instantiated: " + PetInstance.name);
 
-        PetInstance.SetActive(true); // Will be activated later by CubePlacement
+        PetInstance.SetActive(false); // Will be activated later by CubePlacement
+        CubePlacement.placed = false;
+        CubePlacement.entity = PetInstance;
 
         Animator animator = PetInstance.GetComponent<Animator>();
         if (animator == null)

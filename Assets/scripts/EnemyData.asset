@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8a0395d8d9084742ad8ba6737e395a0, type: 3}
   m_Name: EnemyData
   m_EditorClassIdentifier: 
-  enemyName: rem
+  enemyName: shiba_enemy
   icon: {fileID: 0}
-  enemyPrefab: {fileID: 919132149155446097, guid: c87efcd07f8d89949a9336645e245f81,
+  enemyPrefab: {fileID: 919132149155446097, guid: 61a020cefddbb2f45968ff34bd328cbc,
     type: 3}
   health: 0
   attackPower: 0

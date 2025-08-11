@@ -48,7 +48,7 @@ public class InputHandler : MonoBehaviour
         //button listeners 
         resetButton.onClick.AddListener(handleReset);
         micButton.onClick.AddListener(handleMicrophone);
-        attackButton.onClick.AddListener(() => SceneManager.LoadScene("BattleScene", LoadSceneMode.Single));
+        //attackButton.onClick.AddListener(() => SceneManager.LoadScene("BattleScene", LoadSceneMode.Single));
         inventoryButton.onClick.AddListener(ToggleInventory);
         useButton.onClick.AddListener(UseSelectedPet);
 
