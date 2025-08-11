@@ -8,8 +8,8 @@ public class EntitySpawner : MonoBehaviour
     private PetData petData;
     private EnemyData enemyData;
 
-    public ARRaycastManager raycastManager; // Assign in Inspector
-    public ARPlaneManager planeManager;
+    private ARRaycastManager raycastManager; // Assign in Inspector
+    private ARPlaneManager planeManager;
     public float spawnDistance = 0.5f;
 
     private bool spawned = false;
@@ -18,10 +18,14 @@ public class EntitySpawner : MonoBehaviour
     {
         petData = BattleManager.Instance.selectedPet;
         enemyData = BattleManager.Instance.selectedEnemy;
+
     }
 
     void OnEnable()
     {
+        raycastManager = FindObjectsByType<ARRaycastManager>(FindObjectsSortMode.None)[0];
+        planeManager = FindObjectsByType<ARPlaneManager>(FindObjectsSortMode.None)[0];
+
         planeManager.planesChanged += handlePlanes;
     }
 

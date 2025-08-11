@@ -7,7 +7,7 @@ public class ButtonActive : MonoBehaviour
 {
     public Button battleButton;             // Assign this via Inspector
     public float activationDistance = 0.5f; // Distance to activate button
-    public Camera arCamera;                 // Assign AR Camera manually!
+    private Camera arCamera;                 // Assign AR Camera manually!
     public string battleSceneName = "BattleScene"; // ✅ Name of the scene to load
 
     private Transform player;
@@ -15,6 +15,7 @@ public class ButtonActive : MonoBehaviour
 
     void Start()
     {
+        arCamera = FindObjectsByType<Camera>(FindObjectsSortMode.None)[1];
         // Ensure AR Camera is assigned
         if (arCamera != null)
         {
@@ -41,16 +42,6 @@ public class ButtonActive : MonoBehaviour
 
     void Update()
     {
-        if (arCamera != null)
-        {
-            player = arCamera.transform;
-        }
-        else
-        {
-            Debug.LogError("AR Camera not assigned to ButtonActive script!");
-            enabled = false; // Stop script if no camera
-            return;
-        }
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         float closestDist = Mathf.Infinity;
         closestEnemy = null;
@@ -84,7 +75,8 @@ public class ButtonActive : MonoBehaviour
             Debug.Log("Battle started with: " + closestEnemy.name);
 
             // Load another scene
-            SceneManager.LoadScene(battleSceneName);
+            SceneManager.LoadScene(battleSceneName, LoadSceneMode.Additive);
+            SceneManager.UnloadSceneAsync("novime");
         }
         else
         {

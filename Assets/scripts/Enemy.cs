@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
     public float spawnInterval = 3f;
 
     [Header("AR Settings")]
-    public ARPlaneManager planeManager;
+    private ARPlaneManager planeManager;
 
     [Header("Interaction Settings")]
     public float interactDistance = 0.5f; // Distance to show button
@@ -25,6 +25,7 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
+        planeManager = FindObjectsByType<ARPlaneManager>(FindObjectsSortMode.None)[0];
         // Auto-assign ARPlaneManager if not set
         if (planeManager == null)
         {
@@ -130,11 +131,15 @@ public class Enemy : MonoBehaviour
 
             foreach (var plane in planes)
             {
-                Vector3 spawnPos = GetRandomPointOnPlane(plane);
-
-                if (IsFarFromOtherPets(spawnPos))
+                Vector3? spawnPos = GetRandomPointOnPlane(plane);
+                if (spawnPos == null)
                 {
-                    GameObject pet = Instantiate(petPrefab, spawnPos, Quaternion.identity);
+                    continue;
+                }
+
+                if (IsFarFromOtherPets(spawnPos.GetValueOrDefault()))
+                {
+                    GameObject pet = Instantiate(petPrefab, spawnPos.GetValueOrDefault(), Quaternion.identity);
                     pet.tag = "Enemy";
                     spawnedPets.Add(pet);
                     yield return new WaitForSeconds(spawnInterval);
@@ -145,8 +150,12 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    Vector3 GetRandomPointOnPlane(ARPlane plane)
+    Vector3? GetRandomPointOnPlane(ARPlane plane)
     {
+        if (plane == null)
+        {
+            return null;
+        }
         Vector2 randomInPlane = Random.insideUnitCircle * 0.5f;
         Vector3 worldPos = plane.transform.TransformPoint(new Vector3(randomInPlane.x, 0, randomInPlane.y));
         worldPos.y += 0.01f; // Slightly above the plane
