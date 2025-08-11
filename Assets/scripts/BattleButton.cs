@@ -16,7 +16,9 @@ public class ButtonActive : MonoBehaviour
 
     void Start()
     {
-        if (arCamera == null)
+        arCamera = FindObjectsByType<Camera>(FindObjectsSortMode.None)[1];
+        // Ensure AR Camera is assigned
+        if (arCamera != null)
         {
             Debug.LogError("AR Camera not assigned!");
             enabled = false;
@@ -78,7 +80,10 @@ public class ButtonActive : MonoBehaviour
         if (closestEnemy != null)
         {
             Debug.Log("Battle started with: " + closestEnemy.name);
-            SceneManager.LoadScene(battleSceneName);
+
+            // Load another scene
+            SceneManager.LoadScene(battleSceneName, LoadSceneMode.Additive);
+            SceneManager.UnloadSceneAsync("novime");
         }
         else
         {

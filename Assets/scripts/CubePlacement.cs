@@ -7,13 +7,16 @@ using UnityEngine.XR.ARSubsystems;
 
 public class CubePlacement : MonoBehaviour
 {
-    public ARPlaneManager planeManager;
+    private ARPlaneManager planeManager;
     public static GameObject entity;
-    public ARRaycastManager raycastManager;
+    private ARRaycastManager raycastManager;
     public static bool placed = false;
 
-    void OnEnable()
+    void Start()
     {
+        raycastManager = FindObjectsByType<ARRaycastManager>(FindObjectsSortMode.None)[0];
+        planeManager = FindObjectsByType<ARPlaneManager>(FindObjectsSortMode.None)[0];
+
         planeManager.planesChanged += handleDetectedPlanes;
     }
 

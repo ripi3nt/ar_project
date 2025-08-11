@@ -16,7 +16,7 @@ public class InputHandler : MonoBehaviour
     public Button busyMicButton;
 
 
-    public ARSession aRSession;
+    private ARSession aRSession;
     public MicrophoneRecorder microphone;
     private TextToSpeech tts;
     public TextMeshProUGUI text;
@@ -42,6 +42,7 @@ public class InputHandler : MonoBehaviour
     void Start()
     {
 
+        aRSession = FindAnyObjectByType<ARSession>();
 
         tts = new TextToSpeech(this);
         
