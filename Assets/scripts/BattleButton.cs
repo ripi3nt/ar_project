@@ -68,6 +68,7 @@ public class ButtonActive : MonoBehaviour
         {
             battleButton.gameObject.SetActive(true);
             battleButton.interactable = true;
+            BattleManager.Instance.selectedEnemy = closestEnemy;
         }
         else
         {
@@ -80,6 +81,7 @@ public class ButtonActive : MonoBehaviour
         if (closestEnemy != null)
         {
             Debug.Log("Battle started with: " + closestEnemy.name);
+            BattleManager.Instance.PersistEntities();
 
             // Load another scene
             SceneManager.LoadScene(battleSceneName, LoadSceneMode.Additive);

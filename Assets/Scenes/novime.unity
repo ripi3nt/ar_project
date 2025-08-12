@@ -484,8 +484,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b715e9ae95e0184997e74d2ebd1ba66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedPet: {fileID: 11400000, guid: 4623d8beec78fa34eb5e6ac6f859917b, type: 2}
-  selectedEnemy: {fileID: 11400000, guid: c42c9877a46cf594eb12e421d33da841, type: 2}
+  selectedPet: {fileID: 0}
+  selectedEnemy: {fileID: 0}
   petHealth: 0
   enemyHealth: 0
 --- !u!1 &395805776
@@ -1675,8 +1675,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   battleButton: {fileID: 1229165841}
   activationDistance: 1
-  minVisibilityDistance: 0.7
-  maxVisibilityDistance: 3
+  minVisibilityDistance: 0
+  maxVisibilityDistance: 2
   arCamera: {fileID: 0}
   battleSceneName: BattleScene
 --- !u!1 &1216821620
@@ -2523,7 +2523,7 @@ MonoBehaviour:
     type: 3}
   circlePrefab: {fileID: 2240521264310302784, guid: 0059f56858f5ee14ab8f57e467b74057,
     type: 3}
-  minDistanceBetweenPets: 1.5
+  minDistanceBetweenPets: 3
   spawnInterval: 3
 --- !u!114 &2080510128
 MonoBehaviour:

@@ -4,8 +4,8 @@ public class BattleManager : MonoBehaviour
 {
     public static BattleManager Instance;
 
-    public PetData selectedPet;
-    public EnemyData selectedEnemy;
+    public GameObject selectedPet;
+    public GameObject selectedEnemy;
     public int petHealth;
     public int enemyHealth;
 
@@ -17,6 +17,13 @@ public class BattleManager : MonoBehaviour
             return;
         }
         Instance = this;
-        DontDestroyOnLoad(gameObject); 
+        DontDestroyOnLoad(gameObject);
     }
+
+    public void PersistEntities()
+    {
+        DontDestroyOnLoad(selectedEnemy);
+        DontDestroyOnLoad(selectedPet);
+    }
+
 }
