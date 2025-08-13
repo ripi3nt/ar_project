@@ -484,8 +484,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b715e9ae95e0184997e74d2ebd1ba66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedPet: {fileID: 0}
-  selectedEnemy: {fileID: 0}
+  selectedPet: {fileID: 919132149155446097, guid: 9f22bfacf553882428f5636bc9a467af,
+    type: 3}
+  selectedEnemy: {fileID: 919132149155446097, guid: 4c90513ee0d6ac34ea89d54f7db6c069,
+    type: 3}
   petHealth: 0
   enemyHealth: 0
 --- !u!1 &395805776
@@ -1528,6 +1530,7 @@ GameObject:
   - component: {fileID: 1174078441}
   - component: {fileID: 1174078442}
   - component: {fileID: 1174078443}
+  - component: {fileID: 1174078444}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1679,6 +1682,21 @@ MonoBehaviour:
   maxVisibilityDistance: 2
   arCamera: {fileID: 0}
   battleSceneName: BattleScene
+--- !u!114 &1174078444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1174078436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67f823278a815974eba27e7debabc2c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minDistance: 1.5
+  moveSpeed: 3
+  rotationSpeed: 5
 --- !u!1 &1216821620
 GameObject:
   m_ObjectHideFlags: 0
