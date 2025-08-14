@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class BattleSystem : MonoBehaviour
 {
     public static BattleSystem Instance { get; private set; }
-    public Button rock, paper, scissors;
+    public Button rock, paper, scissors, quit;
     public TextMeshProUGUI timerLabel;
     public TextMeshProUGUI outcomeLabel;
     public TextMeshProUGUI scoreLabel;
@@ -37,6 +37,7 @@ public class BattleSystem : MonoBehaviour
         rock.onClick.AddListener(() => PlayerSelectMove(Move.Rock));
         paper.onClick.AddListener(() => PlayerSelectMove(Move.Paper));
         scissors.onClick.AddListener(() => PlayerSelectMove(Move.Scissors));
+        quit.onClick.AddListener(() => FinishGame());
 
         StartCoroutine(StartTurn(1));
 
