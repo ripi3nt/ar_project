@@ -59,6 +59,7 @@ public class InputHandler : MonoBehaviour
         if (InventoryManager.Instance.ownedPets.Count > 0)
         {
             EntityManager.Instance.petData = InventoryManager.Instance.ownedPets[0];
+
             EntityManager.Instance.SpawnPet();
         }
         else
