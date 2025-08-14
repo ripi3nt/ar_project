@@ -1,36 +1,34 @@
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement; // ✅ Needed for scene loading
+using UnityEngine.SceneManagement;
 
 public class ButtonActive : MonoBehaviour
 {
-    public Button battleButton;             // Assign this via Inspector
-    public float activationDistance = 0.5f; // Distance to activate button
-    public Camera arCamera;                 // Assign AR Camera manually!
-    public string battleSceneName = "BattleScene"; // ✅ Name of the scene to load
+    public Button battleButton;
+    public float activationDistance = 0.5f;     // Distance for battle
+    public float minVisibilityDistance = 0.7f;  // Too close → hide
+    public float maxVisibilityDistance = 3f;    // Too far → hide
+    public Camera arCamera;
+    public string battleSceneName = "BattleScene";
 
     private Transform player;
     private GameObject closestEnemy;
 
     void Start()
     {
+        arCamera = FindObjectsByType<Camera>(FindObjectsSortMode.None)[1];
         // Ensure AR Camera is assigned
-        if (arCamera != null)
+        if (arCamera == null)
         {
-            player = arCamera.transform;
-        }
-        else
-        {
-            Debug.LogError("AR Camera not assigned to ButtonActive script!");
-            enabled = false; // Stop script if no camera
+            Debug.LogError("AR Camera not assigned!");
+            enabled = false;
             return;
         }
+        player = arCamera.transform;
 
-        // Ensure button is assigned
         if (battleButton == null)
         {
-            Debug.LogError("Battle Button not assigned in ButtonActive script!");
+            Debug.LogError("Battle Button not assigned!");
             enabled = false;
             return;
         }
@@ -41,16 +39,6 @@ public class ButtonActive : MonoBehaviour
 
     void Update()
     {
-        if (arCamera != null)
-        {
-            player = arCamera.transform;
-        }
-        else
-        {
-            Debug.LogError("AR Camera not assigned to ButtonActive script!");
-            enabled = false; // Stop script if no camera
-            return;
-        }
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         float closestDist = Mathf.Infinity;
         closestEnemy = null;
@@ -58,6 +46,16 @@ public class ButtonActive : MonoBehaviour
         foreach (GameObject enemy in enemies)
         {
             float dist = Vector3.Distance(player.position, enemy.transform.position);
+
+            EnemyIndicatorSimple indicator = enemy.GetComponent<EnemyIndicatorSimple>();
+            if (indicator != null)
+            {
+                // Only show the circle if within visibility range
+                bool inVisibilityRange = dist >= minVisibilityDistance && dist <= maxVisibilityDistance;
+                indicator.SetIndicatorActive(inVisibilityRange);
+            }
+
+            // Track the closest enemy for battle activation
             if (dist < closestDist && dist < activationDistance)
             {
                 closestDist = dist;
@@ -65,11 +63,12 @@ public class ButtonActive : MonoBehaviour
             }
         }
 
+        // Show battle button if in range
         if (closestEnemy != null)
         {
-            Debug.LogError("Dist: " + Vector3.Distance(player.position, closestEnemy.transform.position));
             battleButton.gameObject.SetActive(true);
             battleButton.interactable = true;
+            BattleManager.Instance.selectedEnemy = closestEnemy;
         }
         else
         {
@@ -82,13 +81,15 @@ public class ButtonActive : MonoBehaviour
         if (closestEnemy != null)
         {
             Debug.Log("Battle started with: " + closestEnemy.name);
+            BattleManager.Instance.PersistEntities();
 
             // Load another scene
-            SceneManager.LoadScene(battleSceneName);
+            SceneManager.LoadScene(battleSceneName, LoadSceneMode.Additive);
+            SceneManager.UnloadSceneAsync("novime");
         }
         else
         {
-            Debug.LogWarning("Tried to start battle but no enemy nearby.");
+            Debug.LogWarning("No enemy nearby to battle.");
         }
     }
 }

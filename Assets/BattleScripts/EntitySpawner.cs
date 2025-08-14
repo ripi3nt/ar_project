@@ -5,11 +5,11 @@ using UnityEngine.XR.ARSubsystems;
 
 public class EntitySpawner : MonoBehaviour
 {
-    private PetData petData;
-    private EnemyData enemyData;
+    private GameObject petData;
+    private GameObject enemyData;
 
-    public ARRaycastManager raycastManager; // Assign in Inspector
-    public ARPlaneManager planeManager;
+    private ARRaycastManager raycastManager; // Assign in Inspector
+    private ARPlaneManager planeManager;
     public float spawnDistance = 0.5f;
 
     private bool spawned = false;
@@ -18,10 +18,14 @@ public class EntitySpawner : MonoBehaviour
     {
         petData = BattleManager.Instance.selectedPet;
         enemyData = BattleManager.Instance.selectedEnemy;
+
     }
 
     void OnEnable()
     {
+        raycastManager = FindObjectsByType<ARRaycastManager>(FindObjectsSortMode.None)[0];
+        planeManager = FindObjectsByType<ARPlaneManager>(FindObjectsSortMode.None)[0];
+
         planeManager.planesChanged += handlePlanes;
     }
 
@@ -44,12 +48,14 @@ public class EntitySpawner : MonoBehaviour
             Vector3 enemyPos = center + right * spawnDistance;
 
             // Instantiate
-            GameObject pet = Instantiate(petData.petPrefab, petPos, Quaternion.LookRotation(enemyPos + petPos));
-            GameObject enemy = Instantiate(enemyData.enemyPrefab, enemyPos, Quaternion.LookRotation(petPos - enemyPos));
+            petData = BattleManager.Instance.selectedPet;
+            enemyData = BattleManager.Instance.selectedEnemy;
+            petData.transform.position = petPos;
+            enemyData.transform.position = enemyPos;
+            petData.transform.LookAt(enemyPos, hitPose.up);
+            enemyData.transform.LookAt(petPos, hitPose.up);
 
-            // Ensure they're upright
-            pet.transform.up = hitPose.up;
-            enemy.transform.up = hitPose.up;
+            enemyData.GetComponent<EnemyIndicatorSimple>().SetIndicatorActive(false);
 
             BattleSystem.Instance.start = true;
             spawned = true;

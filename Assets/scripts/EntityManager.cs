@@ -65,6 +65,7 @@ public class EntityManager : MonoBehaviour {
         // Set new pet data
         petData = newData;
         SpawnPet();
+        BattleManager.Instance.selectedPet= PetInstance;
     }
 
 }

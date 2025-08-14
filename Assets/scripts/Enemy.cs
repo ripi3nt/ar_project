@@ -1,141 +1,73 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI; // For UI Button
+using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
-using UnityEngine.XR.ARSubsystems;
+using UnityEngineInternal;
 
 public class Enemy : MonoBehaviour
 {
     [Header("Pet Settings")]
     public GameObject petPrefab;
+    public GameObject circlePrefab;
     public float minDistanceBetweenPets = 1.5f;
     public float spawnInterval = 3f;
 
     [Header("AR Settings")]
-    public ARPlaneManager planeManager;
-
-    [Header("Interaction Settings")]
-    public float interactDistance = 0.5f; // Distance to show button
-    public Button interactButton;         // Reference to UI Button
-    public Transform playerCamera;        // AR Camera or Main Camera
+    private ARPlaneManager planeManager;
 
     private List<GameObject> spawnedPets = new List<GameObject>();
-    private bool isSpawning = false;
 
     void Start()
     {
+        planeManager = FindObjectsByType<ARPlaneManager>(FindObjectsSortMode.None)[0];
         // Auto-assign ARPlaneManager if not set
         if (planeManager == null)
         {
             planeManager = FindObjectOfType<ARPlaneManager>();
-            if (planeManager != null)
+            if (planeManager == null)
             {
-                Debug.Log("ARPlaneManager auto-assigned.");
+                Debug.LogError("ARPlaneManager not found!");
+                enabled = false;
+                return;
             }
-        }
-
-        if (planeManager == null)
-        {
-            Debug.LogError("ARPlaneManager not assigned and not found.");
-            enabled = false;
-            return;
-        }
-
-        // Hide button at start and link click event
-        if (interactButton != null)
-        {
-            interactButton.gameObject.SetActive(false);
-            interactButton.onClick.AddListener(OnInteractButtonClicked);
-        }
-
-        // Try to assign camera immediately (may still be null)
-        if (playerCamera == null && Camera.main != null)
-        {
-            playerCamera = Camera.main.transform;
         }
 
         StartCoroutine(SpawnPetsGradually());
     }
 
-    void Update()
-    {
-        // If camera is still not assigned, try again
-        if (playerCamera == null && Camera.main != null)
-        {
-            playerCamera = Camera.main.transform;
-        }
-
-        // If no camera, skip logic
-        if (playerCamera == null) return;
-
-        GameObject nearestPet = GetNearestPet();
-
-        if (nearestPet != null && Vector3.Distance(playerCamera.position, nearestPet.transform.position) <= interactDistance)
-        {
-            if (interactButton != null)
-            {
-                interactButton.gameObject.SetActive(true);
-            }
-        }
-        else
-        {
-            if (interactButton != null)
-            {
-                interactButton.gameObject.SetActive(false);
-            }
-        }
-    }
-
-    GameObject GetNearestPet()
-    {
-        GameObject nearest = null;
-        float minDist = Mathf.Infinity;
-
-        foreach (var pet in spawnedPets)
-        {
-            if (pet == null) continue;
-            float dist = Vector3.Distance(playerCamera.position, pet.transform.position);
-            if (dist < minDist)
-            {
-                minDist = dist;
-                nearest = pet;
-            }
-        }
-        return nearest;
-    }
-
-    void OnInteractButtonClicked()
-    {
-        GameObject nearestPet = GetNearestPet();
-        if (nearestPet != null)
-        {
-            Debug.Log("Interacted with: " + nearestPet.name);
-            Destroy(nearestPet); // Example: remove the pet
-        }
-    }
-
     IEnumerator SpawnPetsGradually()
     {
-        isSpawning = true;
-
         while (true)
         {
-            // Copy planes into our own list to avoid modification errors
             List<ARPlane> planes = new List<ARPlane>();
             foreach (var plane in planeManager.trackables)
-            {
                 planes.Add(plane);
-            }
 
             foreach (var plane in planes)
             {
-                Vector3 spawnPos = GetRandomPointOnPlane(plane);
-
-                if (IsFarFromOtherPets(spawnPos))
+                Vector3? spawnPos = GetRandomPointOnPlane(plane);
+                if (spawnPos == null)
                 {
-                    GameObject pet = Instantiate(petPrefab, spawnPos, Quaternion.identity);
+                    continue;
+                }
+
+                if (IsFarFromOtherPets(spawnPos.GetValueOrDefault()))
+                {
+                    GameObject pet = Instantiate(petPrefab, spawnPos.GetValueOrDefault(), Quaternion.identity);
                     pet.tag = "Enemy";
+
+                    // Add circle indicator
+                    if (circlePrefab != null)
+                    {
+                        GameObject indicator = Instantiate(circlePrefab, pet.transform);
+                        indicator.transform.localPosition = Vector3.zero;
+                        indicator.SetActive(false);
+
+                        EnemyIndicatorSimple indicatorScript = pet.AddComponent<EnemyIndicatorSimple>();
+                        indicatorScript.circleIndicator = indicator;
+                    }
+
                     spawnedPets.Add(pet);
                     yield return new WaitForSeconds(spawnInterval);
                 }
@@ -145,11 +77,15 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    Vector3 GetRandomPointOnPlane(ARPlane plane)
+    Vector3? GetRandomPointOnPlane(ARPlane plane)
     {
+        if (plane == null)
+        {
+            return null;
+        }
         Vector2 randomInPlane = Random.insideUnitCircle * 0.5f;
         Vector3 worldPos = plane.transform.TransformPoint(new Vector3(randomInPlane.x, 0, randomInPlane.y));
-        worldPos.y += 0.01f; // Slightly above the plane
+        worldPos.y += 0.01f;
         return worldPos;
     }
 
