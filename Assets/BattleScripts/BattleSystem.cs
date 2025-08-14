@@ -47,6 +47,32 @@ public class BattleSystem : MonoBehaviour
         playerMove = move;
     }
 
+    IEnumerator textPopAnimation(TextMeshProUGUI label, float scaleUpAmount, float duration)
+    {
+        Vector3 originalScale = label.transform.localScale;
+        Vector3 targetScale = originalScale * scaleUpAmount;
+
+        // Scale up
+        float t = 0;
+        while (t < duration)
+        {
+            t += Time.deltaTime;
+            float progress = t / duration;
+            label.transform.localScale = Vector3.Lerp(originalScale, targetScale, progress);
+            yield return null;
+        }
+
+        // Scale back
+        t = 0;
+        while (t < duration)
+        {
+            t += Time.deltaTime;
+            float progress = t / duration;
+            label.transform.localScale = Vector3.Lerp(targetScale, originalScale, progress);
+            yield return null;
+        }
+    }
+
     IEnumerator StartTurn(int turn)
     {
         playerMove = Move.None;
@@ -54,15 +80,21 @@ public class BattleSystem : MonoBehaviour
 
         if (turn == 1)
         {
-        yield return StartCoroutine(ShowInfo("Game starting in 3", 1));
-        yield return StartCoroutine(ShowInfo("Game starting in 2", 1));
-        yield return StartCoroutine(ShowInfo("Game starting in 1", 1));
+            yield return StartCoroutine(ShowInfo("Game starting in 3", 1));
+            yield return StartCoroutine(ShowInfo("Game starting in 2", 1));
+            yield return StartCoroutine(ShowInfo("Game starting in 1", 1));
         }
 
+        bool animationRunning = false;
         while (timer > 0f && playerMove == Move.None)
         {
             timerLabel.text = timer.ToString("F2");
             timer -= Time.deltaTime;
+            if (timer < 1.5f && !animationRunning)
+            {
+                StartCoroutine(textPopAnimation(timerLabel, 2f, 0.5f));
+                animationRunning = true;
+            }
             yield return null;
         }
 
@@ -123,7 +155,7 @@ public class BattleSystem : MonoBehaviour
         }
 
         scoreLabel.text = playerScore + " : " + enemyScore;
-        yield return StartCoroutine(ShowInfo(outcome , 2));
+        yield return StartCoroutine(ShowInfo(outcome, 2));
     }
 
     void Awake()
@@ -140,7 +172,11 @@ public class BattleSystem : MonoBehaviour
     {
         outcomeLabel.text = info;
         outcomeLabel.gameObject.SetActive(true);
-        yield return new WaitForSeconds(delay);
+        for (float i = delay; i > 0; i--)
+        {
+            timerLabel.text = i.ToString("F2");
+            yield return new WaitForSeconds(1);
+        }
         outcomeLabel.gameObject.SetActive(false);
     }
 
