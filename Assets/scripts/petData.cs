@@ -11,4 +11,5 @@ public class PetData : ScriptableObject
     public RuntimeAnimatorController animator;
     public Vector3 savedPosition;
     public Quaternion savedRotation;
+    public AudioClip petSound;
 }
