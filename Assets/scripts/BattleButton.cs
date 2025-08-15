@@ -18,7 +18,7 @@ public class ButtonActive : MonoBehaviour
     {
         arCamera = FindObjectsByType<Camera>(FindObjectsSortMode.None)[1];
         // Ensure AR Camera is assigned
-        if (arCamera == null)
+        if (arCamera = null)
         {
             Debug.LogError("AR Camera not assigned!");
             enabled = false;

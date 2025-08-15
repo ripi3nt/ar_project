@@ -1531,6 +1531,7 @@ GameObject:
   - component: {fileID: 1174078442}
   - component: {fileID: 1174078443}
   - component: {fileID: 1174078444}
+  - component: {fileID: 1174078445}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1695,8 +1696,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minDistance: 1.5
-  moveSpeed: 3
+  maxSpeed: 5
   rotationSpeed: 5
+--- !u!114 &1174078445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1174078436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 380851b58c54fc6428bf941cd21ef6a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  petData: {fileID: 11400000, guid: 4623d8beec78fa34eb5e6ac6f859917b, type: 2}
 --- !u!1 &1216821620
 GameObject:
   m_ObjectHideFlags: 0
