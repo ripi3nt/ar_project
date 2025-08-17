@@ -21,3 +21,4 @@ MonoBehaviour:
   animator: {fileID: 9100000, guid: 9f62cb52e9279a847adbadbad4cf7750, type: 2}
   savedPosition: {x: 0, y: 0, z: 0}
   savedRotation: {x: 0, y: 0, z: 0, w: 0}
+  petSound: {fileID: 8300000, guid: 109e571507a415e4da0bd409b1d54890, type: 3}
