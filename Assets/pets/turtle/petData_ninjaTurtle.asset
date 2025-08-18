@@ -18,7 +18,7 @@ MonoBehaviour:
     type: 3}
   health: 0
   attackPower: 0
-  animator: {fileID: 0}
+  animator: {fileID: 9100000, guid: 6b86831b43127a34d93aa3214732e832, type: 2}
   savedPosition: {x: 0, y: 0, z: 0}
   savedRotation: {x: 0, y: 0, z: 0, w: 0}
   petSound: {fileID: 8300000, guid: 5f22da1c08906c542ac364a41bcbc1fb, type: 3}

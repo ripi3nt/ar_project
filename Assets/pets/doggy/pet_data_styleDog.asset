@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   petName: doggy
   icon: {fileID: 21300000, guid: 08633e8d77689d549beba5887ed52ff6, type: 3}
-  petPrefab: {fileID: 919132149155446097, guid: a4db411a476961443a7222c67685fffd,
+  petPrefab: {fileID: 919132149155446097, guid: 64891fafb2d366343b36c446984b8213,
     type: 3}
   health: 0
   attackPower: 0
-  animator: {fileID: 0}
+  animator: {fileID: 9100000, guid: 393dfe0d003d5c3449368197999475dc, type: 2}
   savedPosition: {x: 0, y: 0, z: 0}
   savedRotation: {x: 0, y: 0, z: 0, w: 0}
   petSound: {fileID: 8300000, guid: d44849596c923414da14b23cac1e9086, type: 3}

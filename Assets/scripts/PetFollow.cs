@@ -55,7 +55,7 @@ public class DogFollower : MonoBehaviour
         lastPosition = dog.transform.position;
 
         // Update animator
-        if (dogAnimator != null)
+        /*if (dogAnimator != null)
         {
             Debug.Log("Speed: " + currentSpeed.ToString("F3"));
             if (currentSpeed > 0.01f)
@@ -67,7 +67,7 @@ public class DogFollower : MonoBehaviour
             {
                 dogAnimator.SetBool("isWalking", false);
             }
-        }
+        }*/
 
         // Rotate smoothly toward camera
         Vector3 lookDirection = cameraTransform.position - dog.transform.position;

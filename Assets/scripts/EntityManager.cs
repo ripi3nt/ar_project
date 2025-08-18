@@ -65,6 +65,15 @@ public class EntityManager : MonoBehaviour {
         // Set new pet data
         petData = newData;
         SpawnPet();
+        
+        Animator animator = PetInstance.GetComponent<Animator>();
+        if (animator == null)
+        {
+            animator = PetInstance.AddComponent<Animator>();
+        }
+        animator.runtimeAnimatorController = petData.animator;
+        Debug.Log("Animator assigned.");
+
         BattleManager.Instance.selectedPet= PetInstance;
     }
 
