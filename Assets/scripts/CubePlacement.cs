@@ -42,6 +42,7 @@ public class CubePlacement : MonoBehaviour
             entity.transform.rotation = Quaternion.LookRotation(direction);
 
             entity.SetActive(true);
+            BattleManager.Instance.selectedPet = entity;
             Debug.Log("Pet activated!");
 
             placed = true;
