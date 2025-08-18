@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc829cc0223bd6a449de3d35f6a1874c, type: 3}
   m_Name: pet_data_styleDog
   m_EditorClassIdentifier: 
-  petName: 
-  icon: {fileID: 0}
-  petPrefab: {fileID: 0}
+  petName: doggy
+  icon: {fileID: 21300000, guid: 08633e8d77689d549beba5887ed52ff6, type: 3}
+  petPrefab: {fileID: 919132149155446097, guid: a4db411a476961443a7222c67685fffd,
+    type: 3}
   health: 0
   attackPower: 0
   animator: {fileID: 0}
   savedPosition: {x: 0, y: 0, z: 0}
   savedRotation: {x: 0, y: 0, z: 0, w: 0}
-  petSound: {fileID: 0}
+  petSound: {fileID: 8300000, guid: d44849596c923414da14b23cac1e9086, type: 3}

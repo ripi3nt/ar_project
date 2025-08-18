@@ -1664,6 +1664,9 @@ MonoBehaviour:
   ownedPets:
   - {fileID: 11400000, guid: 5722e83e7d94efd4fa7edb20ee71de8c, type: 2}
   - {fileID: 11400000, guid: 4623d8beec78fa34eb5e6ac6f859917b, type: 2}
+  - {fileID: 11400000, guid: b84be8984c0778c448ef2f545a22c48c, type: 2}
+  - {fileID: 11400000, guid: 5a417c32ce42ad046954d38863935fff, type: 2}
+  - {fileID: 11400000, guid: bf1518cd02464bc4b8c2ee6bebce947a, type: 2}
   selectedPet: {fileID: 0}
 --- !u!114 &1174078443
 MonoBehaviour:

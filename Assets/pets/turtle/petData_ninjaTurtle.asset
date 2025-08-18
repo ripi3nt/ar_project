@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc829cc0223bd6a449de3d35f6a1874c, type: 3}
   m_Name: petData_ninjaTurtle
   m_EditorClassIdentifier: 
-  petName: 
-  icon: {fileID: 0}
-  petPrefab: {fileID: 0}
+  petName: turtle
+  icon: {fileID: 21300000, guid: f4d3adc503a807043abc5e218a1fc369, type: 3}
+  petPrefab: {fileID: 919132149155446097, guid: e557827315671084aaac72e7f172eb90,
+    type: 3}
   health: 0
   attackPower: 0
   animator: {fileID: 0}
   savedPosition: {x: 0, y: 0, z: 0}
   savedRotation: {x: 0, y: 0, z: 0, w: 0}
+  petSound: {fileID: 8300000, guid: 5f22da1c08906c542ac364a41bcbc1fb, type: 3}
