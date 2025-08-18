@@ -16,7 +16,7 @@ public class ButtonActive : MonoBehaviour
 
     void Start()
     {
-        arCamera = FindObjectsByType<Camera>(FindObjectsSortMode.None)[1];
+        arCamera = FindObjectsByType<Camera>(FindObjectsSortMode.None)[0];
         // Ensure AR Camera is assigned
         if (arCamera == null)
         {

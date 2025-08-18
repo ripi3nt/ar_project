@@ -57,6 +57,7 @@ public class DogFollower : MonoBehaviour
         // Update animator
         if (dogAnimator != null)
         {
+            Debug.Log("Speed: " + currentSpeed.ToString("F3"));
             if (currentSpeed > 0.01f)
             {
                 dogAnimator.SetBool("isWalking", true);
